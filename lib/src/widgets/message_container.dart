@@ -120,6 +120,17 @@ class MessageContainer extends StatelessWidget {
           crossAxisAlignment:
               isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: 3.0,
+              ),
+              child: Text(
+                '${message.user.firstName} ${message.user.lastName}',
+                style: TextStyle(
+                  fontSize: 10.0,
+                ),
+              ),
+            )
             if (this.textBeforeImage)
               _buildMessageText()
             else
