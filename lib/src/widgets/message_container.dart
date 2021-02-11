@@ -130,7 +130,7 @@ class MessageContainer extends StatelessWidget {
                   fontSize: 10.0,
                 ),
               ),
-            )
+            ),
             if (this.textBeforeImage)
               _buildMessageText()
             else
