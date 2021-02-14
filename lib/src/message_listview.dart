@@ -37,44 +37,44 @@ class MessageListView extends StatefulWidget {
   final double avatarMaxSize;
   final BoxDecoration Function(ChatMessage, bool) messageDecorationBuilder;
 
-  MessageListView(
-      {this.showLoadEarlierWidget,
-      this.avatarMaxSize,
-      this.shouldShowLoadEarlier,
-      this.constraints,
-      this.onLoadEarlier,
-      this.defaultLoadCallback,
-      this.messageContainerPadding =
-          const EdgeInsets.only(top: 10.0, right: 10.0, left: 10.0),
-      this.scrollController,
-      this.parsePatterns = const [],
-      this.messageContainerDecoration,
-      this.messages,
-      this.user,
-      this.showuserAvatar,
-      this.dateFormat,
-      this.timeFormat,
-      this.showAvatarForEverMessage,
-      this.inverted,
-      this.onLongPressAvatar,
-      this.onLongPressMessage,
-      this.onPressAvatar,
-      this.renderAvatarOnTop,
-      this.messageBuilder,
-      this.renderMessageFooter,
-      this.avatarBuilder,
-      this.dateBuilder,
-      this.messageImageBuilder,
-      this.messageTextBuilder,
-      this.messageTimeBuilder,
-      this.changeVisible,
-      this.visible,
-      this.showLoadMore,
-      this.messageButtonsBuilder,
-      this.messagePadding = const EdgeInsets.all(8.0),
-      this.textBeforeImage = true,
-      this.messageDecorationBuilder,
-      });
+  MessageListView({
+    this.showLoadEarlierWidget,
+    this.avatarMaxSize,
+    this.shouldShowLoadEarlier,
+    this.constraints,
+    this.onLoadEarlier,
+    this.defaultLoadCallback,
+    this.messageContainerPadding =
+        const EdgeInsets.only(top: 10.0, right: 10.0, left: 10.0),
+    this.scrollController,
+    this.parsePatterns = const [],
+    this.messageContainerDecoration,
+    this.messages,
+    this.user,
+    this.showuserAvatar,
+    this.dateFormat,
+    this.timeFormat,
+    this.showAvatarForEverMessage,
+    this.inverted,
+    this.onLongPressAvatar,
+    this.onLongPressMessage,
+    this.onPressAvatar,
+    this.renderAvatarOnTop,
+    this.messageBuilder,
+    this.renderMessageFooter,
+    this.avatarBuilder,
+    this.dateBuilder,
+    this.messageImageBuilder,
+    this.messageTextBuilder,
+    this.messageTimeBuilder,
+    this.changeVisible,
+    this.visible,
+    this.showLoadMore,
+    this.messageButtonsBuilder,
+    this.messagePadding = const EdgeInsets.all(8.0),
+    this.textBeforeImage = true,
+    this.messageDecorationBuilder,
+  });
 
   @override
   _MessageListViewState createState() => _MessageListViewState();
@@ -219,78 +219,98 @@ class _MessageListViewState extends State<MessageListView> {
                                   ),
                                 ),
                                 Expanded(
-                                  child: GestureDetector(
-                                    onLongPress: () {
-                                      if (widget.onLongPressMessage != null) {
-                                        widget.onLongPressMessage(
-                                            widget.messages[i]);
-                                      } else {
-                                        showBottomSheet(
-                                            context: context,
-                                            builder: (context) => Container(
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      ListTile(
-                                                        leading: Icon(
-                                                            Icons.content_copy),
-                                                        title: Text(
-                                                            "Copy to clipboard"),
-                                                        onTap: () {
-                                                          Clipboard.setData(
-                                                              ClipboardData(
-                                                                  text: widget
-                                                                      .messages[
-                                                                          i]
-                                                                      .text));
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      )
-                                                    ],
-                                                  ),
-                                                ));
-                                      }
-                                    },
-                                    child: widget.messageBuilder != null
-                                        ? widget
-                                            .messageBuilder(widget.messages[i])
-                                        : Align(
-                                            alignment:
-                                                widget.messages[i].user.uid ==
-                                                        widget.user.uid
-                                                    ? AlignmentDirectional.centerEnd
-                                                    : AlignmentDirectional.centerStart,
-                                            child: MessageContainer(
-                                              messagePadding:
-                                                  widget.messagePadding,
-                                              constraints: constraints,
-                                              isUser:
-                                                  widget.messages[i].user.uid ==
-                                                      widget.user.uid,
-                                              message: widget.messages[i],
-                                              timeFormat: widget.timeFormat,
-                                              messageImageBuilder:
-                                                  widget.messageImageBuilder,
-                                              messageTextBuilder:
-                                                  widget.messageTextBuilder,
-                                              messageTimeBuilder:
-                                                  widget.messageTimeBuilder,
-                                              messageContainerDecoration: widget
-                                                  .messageContainerDecoration,
-                                              parsePatterns:
-                                                  widget.parsePatterns,
-                                              buttons:
-                                                  widget.messages[i].buttons,
-                                              messageButtonsBuilder:
-                                                  widget.messageButtonsBuilder,
-                                              textBeforeImage:
-                                                  widget.textBeforeImage,
-                                              messageDecorationBuilder:
-                                                  widget.messageDecorationBuilder,
-                                            ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Align(
+                                        alignment: widget
+                                                    .messages[i].user.uid ==
+                                                widget.user.uid
+                                            ? AlignmentDirectional.centerEnd
+                                            : AlignmentDirectional.centerStart,
+                                        child: Text(
+                                          '${widget.messages[i].user.firstName} ${widget.messages[i].user.lastName}',
+                                          style: TextStyle(
+                                            fontSize: 10.0,
                                           ),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onLongPress: () {
+                                          if (widget.onLongPressMessage !=
+                                              null) {
+                                            widget.onLongPressMessage(
+                                                widget.messages[i]);
+                                          } else {
+                                            showBottomSheet(
+                                                context: context,
+                                                builder: (context) => Container(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: <Widget>[
+                                                          ListTile(
+                                                            leading: Icon(Icons
+                                                                .content_copy),
+                                                            title: Text(
+                                                                "Copy to clipboard"),
+                                                            onTap: () {
+                                                              Clipboard.setData(
+                                                                  ClipboardData(
+                                                                      text: widget
+                                                                          .messages[
+                                                                              i]
+                                                                          .text));
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ));
+                                          }
+                                        },
+                                        child: widget.messageBuilder != null
+                                            ? widget.messageBuilder(
+                                                widget.messages[i])
+                                            : Align(
+                                                alignment: widget.messages[i]
+                                                            .user.uid ==
+                                                        widget.user.uid
+                                                    ? AlignmentDirectional
+                                                        .centerEnd
+                                                    : AlignmentDirectional
+                                                        .centerStart,
+                                                child: MessageContainer(
+                                                  messagePadding:
+                                                      widget.messagePadding,
+                                                  constraints: constraints,
+                                                  isUser: widget.messages[i]
+                                                          .user.uid ==
+                                                      widget.user.uid,
+                                                  message: widget.messages[i],
+                                                  timeFormat: widget.timeFormat,
+                                                  messageImageBuilder: widget
+                                                      .messageImageBuilder,
+                                                  messageTextBuilder:
+                                                      widget.messageTextBuilder,
+                                                  messageTimeBuilder:
+                                                      widget.messageTimeBuilder,
+                                                  messageContainerDecoration: widget
+                                                      .messageContainerDecoration,
+                                                  parsePatterns:
+                                                      widget.parsePatterns,
+                                                  buttons: widget
+                                                      .messages[i].buttons,
+                                                  messageButtonsBuilder: widget
+                                                      .messageButtonsBuilder,
+                                                  textBeforeImage:
+                                                      widget.textBeforeImage,
+                                                  messageDecorationBuilder: widget
+                                                      .messageDecorationBuilder,
+                                                ),
+                                              ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 if (widget.showuserAvatar)
