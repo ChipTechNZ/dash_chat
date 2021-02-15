@@ -227,11 +227,35 @@ class _MessageListViewState extends State<MessageListView> {
                                                 widget.user.uid
                                             ? AlignmentDirectional.centerEnd
                                             : AlignmentDirectional.centerStart,
-                                        child: Text(
-                                          '${widget.messages[i].user.firstName} ${widget.messages[i].user.lastName}',
-                                          style: TextStyle(
-                                            fontSize: 10.0,
-                                          ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              widget.messages[i].user.uid ==
+                                                      widget.user.uid
+                                                  ? MainAxisAlignment.end
+                                                  : MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              '${widget.messages[i].user.firstName} ${widget.messages[i].user.lastName}',
+                                              style: TextStyle(
+                                                  fontSize: 12.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              width: 3.0,
+                                            ),
+                                            Text(
+                                              widget.timeFormat != null
+                                                  ? widget.timeFormat.format(
+                                                      widget.messages[i]
+                                                          .createdAt)
+                                                  : DateFormat('HH:mm:ss')
+                                                      .format(widget.messages[i]
+                                                          .createdAt),
+                                              style: TextStyle(
+                                                fontSize: 12.0,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       GestureDetector(
