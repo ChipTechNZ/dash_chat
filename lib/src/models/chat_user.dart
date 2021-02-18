@@ -29,6 +29,8 @@ class ChatUser {
   /// functionality to dashchat.
   Map<String, dynamic> customProperties;
 
+  String phoneNumber;
+
   ChatUser({
     String uid,
     String name,
@@ -38,6 +40,7 @@ class ChatUser {
     this.customProperties,
     this.firstName,
     this.lastName,
+    this.phoneNumber,
   }) {
     this.name = name == null ? "$firstName $lastName" : name;
     this.uid = uid != null ? uid : Uuid().v4().toString();
@@ -55,6 +58,7 @@ class ChatUser {
         json['containerColor'] != null ? Color(json['containerColor']) : null;
     color = json['color'] != null ? Color(json['color']) : null;
     customProperties = json['customProperties'] as Map<String, dynamic>;
+    phoneNumber = json['phoneNumber'];
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +74,7 @@ class ChatUser {
           containerColor != null ? containerColor.value : null;
       data['color'] = color != null ? color.value : null;
       data['customProperties'] = this.customProperties;
+      data['phoneNumber'] = this.phoneNumber;
     } catch (e) {
       print(e);
     }
