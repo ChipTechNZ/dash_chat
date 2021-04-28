@@ -5,49 +5,46 @@ part of dash_chat;
 class ChatUser {
   /// Unique id of the user if no unique is provided a [UUID v4]
   /// is automatically assigned to the chat user.
-  String uid;
+  String? uid;
 
   /// An [optional] parameter to set the user name.
-  String name;
+  String? name;
 
   /// An [optional] parameter to set the user first name, if set will override the name property.
-  String firstName;
+  String? firstName;
 
   /// An [optional] parameter to set the user last name, if set will override the name property.
-  String lastName;
+  String? lastName;
 
   /// An [optional] parameter to set the user avatar.
-  String avatar;
+  String? avatar;
 
   /// An [optional] parameter to set Text Color
-  Color color;
+  Color? color;
 
   /// An [optional] parameter to set The Message bubble Color
-  Color containerColor;
+  Color? containerColor;
 
   /// Allows to set custom-properties that could help with implementing custom
   /// functionality to dashchat.
-  Map<String, dynamic> customProperties;
-
-  String phoneNumber;
+  Map<String, dynamic>? customProperties;
 
   ChatUser({
-    String uid,
-    String name,
+    String? uid,
+    String? name,
     this.avatar,
     this.containerColor,
     this.color,
     this.customProperties,
     this.firstName,
     this.lastName,
-    this.phoneNumber,
   }) {
     this.name = name == null ? "$firstName $lastName" : name;
     this.uid = uid != null ? uid : Uuid().v4().toString();
   }
 
   ChatUser.fromJson(Map<dynamic, dynamic> json) {
-    final pName = json["name"] as String;
+    final pName = json["name"] as String?;
 
     uid = json['uid'];
     name = pName == null ? "$firstName $lastName" : pName;
@@ -57,8 +54,7 @@ class ChatUser {
     containerColor =
         json['containerColor'] != null ? Color(json['containerColor']) : null;
     color = json['color'] != null ? Color(json['color']) : null;
-    customProperties = json['customProperties'] as Map<String, dynamic>;
-    phoneNumber = json['phoneNumber'];
+    customProperties = json['customProperties'] as Map<String, dynamic>?;
   }
 
   Map<String, dynamic> toJson() {
@@ -71,10 +67,9 @@ class ChatUser {
       data['lastName'] = lastName;
       data['avatar'] = avatar;
       data['containerColor'] =
-          containerColor != null ? containerColor.value : null;
-      data['color'] = color != null ? color.value : null;
+          containerColor != null ? containerColor!.value : null;
+      data['color'] = color != null ? color!.value : null;
       data['customProperties'] = this.customProperties;
-      data['phoneNumber'] = this.phoneNumber;
     } catch (e) {
       print(e);
     }
